@@ -1,5 +1,5 @@
 import { useState } from "react";
-import ajayImage from "../assets/ajayImage.jpg";
+import perfect from "../assets/perfect.jpg";
 import Ajay_Resume from "../assets/Ajay_Resume.pdf";
 import TrendyCart from "../assets/TrendyCart.png";
 import { TiHtml5 } from "react-icons/ti";
@@ -14,6 +14,7 @@ import { PiFileSql } from "react-icons/pi";
 import { FaGitSquare } from "react-icons/fa";
 import { FaGithub } from "react-icons/fa";
 import { FaLinkedin } from "react-icons/fa";
+import { BiLogoGmail } from "react-icons/bi";
 
 const SkillCategory = ({ title, icons, colors, names, isOpen, onClick }) => (
   <div className="mb-6 overflow-hidden">
@@ -147,11 +148,11 @@ const Home = () => {
             </div>
 
             <div className="md:w-5/12 flex justify-center mb-8 md:mb-0">
-              <div className="relative w-40 h-40 md:w-64 md:h-64 overflow-hidden rounded-full border-4 border-black bg-gradient-to-br from-gray-700 to-gray-900 shadow-xl">
+              <div className="relative w-45 h-45 md:w-74 md:h-74 overflow-hidden rounded-full border-4 border-black">
                 <img
-                  src={ajayImage}
+                  src={perfect}
                   alt="Desamsetty Sri Ajay - Full Stack Developer"
-                  className="w-full h-full object-cover object-center"
+                  className="w-full h-full object-cover object-top  scale-130 transition-transform duration-300 transform "
                 />
               </div>
             </div>
@@ -325,39 +326,60 @@ const Home = () => {
         </div>
       </section>
       
-      {/* Get In Touch */}
-      <section id="details" className="py-12 md:py-16">
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-4">
-            Get In <span className="text-red-600 animate-pulse ">Touch</span>
-          </h2>
-          <p className="text-gray-300 mb-6 md:mb-8 max-w-xl mx-auto text-sm md:text-base">
-            Feel free to connect with me through my social media profiles.
-          </p>
-          
-          <div className="flex justify-center gap-6">
-            <a
-              href="https://github.com/Desamsetty-SriAjay"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-white hover:text-gray-400 transition duration-300"
-              aria-label="GitHub Profile"
-            >
-              <FaGithub className="text-3xl md:text-4xl" />
-            </a>
+     {/* Get In Touch */}
+<section id="details" className="py-12 md:py-16">
+  <div className="container mx-auto px-4 text-center">
+    <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-4">
+      Get In <span className="text-red-600 animate-pulse">Touch</span>
+    </h2>
+    <p className="text-gray-300 mb-6 md:mb-8 max-w-xl mx-auto text-sm md:text-base">
+      Feel free to connect with me through my social media profiles.
+    </p>
 
-            <a
-              href="https://www.linkedin.com/in/desamsettysriajay/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-blue-500 hover:text-blue-400 transition duration-300"
-              aria-label="LinkedIn Profile"
-            >
-              <FaLinkedin className="text-3xl md:text-4xl" />
-            </a>
-          </div>
-        </div>
-      </section>
+    {/* Social Icons */}
+    <div className="flex justify-center gap-6 mb-6">
+      <a
+        href="https://github.com/Desamsetty-SriAjay"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="text-white hover:text-gray-400 transition duration-300"
+        aria-label="GitHub Profile"
+      >
+        <FaGithub className="text-3xl md:text-4xl" />
+      </a>
+
+      <a
+        href="https://www.linkedin.com/in/desamsettysriajay/"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="text-blue-500 hover:text-blue-400 transition duration-300"
+        aria-label="LinkedIn Profile"
+      >
+        <FaLinkedin className="text-3xl md:text-4xl" />
+      </a>
+
+      <a
+        href="mailto:desamsettysriajay@gmail.com"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="text-red-500 hover:text-red-400 transition duration-300"
+        aria-label="Send Email"
+      >
+        <BiLogoGmail className="text-3xl md:text-4xl" />
+      </a>
+    </div>
+
+    <div className="mt-4">
+      <a 
+        href="mailto:desamsettysriajay@gmail.com" 
+        className="inline-block px-4 py-2 bg-gray-800 hover:bg-gray-700 rounded-lg text-gray-300 hover:text-white transition duration-300 text-sm md:text-base text-red-600"
+      >
+        desamsettysriajay@gmail.com
+      </a>
+    </div>
+  </div>
+</section>
+ 
     </div>
   );
 };
