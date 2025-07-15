@@ -176,7 +176,7 @@ const Home = () => {
       {/* Mobile Navigation */}
       <div className="md:hidden fixed top-0 left-0 right-0 bg-gray-900 z-50 shadow-md">
         <div className="container mx-auto px-4 py-3 flex justify-between items-center">
-          <div className="text-xl font-bold text-white">Ajay's Portfolio</div>
+          <div className="text-xl font-bold text-white">Ajay's <span className="text-red-600 animate-pulse">Portfolio</span></div>
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             className="text-white focus:outline-none"
