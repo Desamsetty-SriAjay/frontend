@@ -1,6 +1,6 @@
 import { useState } from "react";
 import perfect from "../assets/perfect.jpg";
-import Ajay_Resume from "../assets/Ajay_Resume.pdf";
+import Sri_Ajay_Resume from "../assets/Sri_Ajay_Resume.pdf";
 import TrendyCart from "../assets/TrendyCart.png";
 import Headlines from "../assets/Headlines.png";
 import Agent from "../assets/Agent.png";
@@ -110,9 +110,9 @@ const Home = () => {
     {
       id: "programminglanguages",
       title: "programming Languages",
-      icons: [FaJava, IoLogoJavascript,FaPython],
-      colors: ["text-orange-700", "text-yellow-500","text-gray-200"],
-      names: ["Java", "JavaScript","Python"],
+      icons: [FaJava, IoLogoJavascript, FaPython],
+      colors: ["text-orange-700", "text-yellow-500", "text-gray-200"],
+      names: ["Java", "JavaScript", "Python"],
     },
 
     {
@@ -147,7 +147,12 @@ const Home = () => {
       description:
         "In today's fast-paced world, switching between different news channels or websites to stay updated is inconvenient. Headlines Hub solves this by aggregating headlines from multiple sources into one user-friendly platform.",
       tags: ["React", "MongoDB", "JavaScript", "Node.js", "TailwindCSS"],
-      tagColors: ["text-blue-400", "text-green-400", "text-purple-400","text-yellow-500"],
+      tagColors: [
+        "text-blue-400",
+        "text-green-400",
+        "text-purple-400",
+        "text-yellow-500",
+      ],
       liveDemo: "https://headlines-hub-beta.vercel.app/",
       sourceCode: "https://github.com/Desamsetty-SriAjay/Headlines-Hub.",
       image: Headlines,
@@ -159,7 +164,8 @@ const Home = () => {
         " This project is an AI-powered assistant that recommends trail runs based on calendar events, real-time weather, and hiking trail data using GPT-4o-mini, Google APIs, and LangChain-compatible nodes — all orchestrated in n8n.",
       tags: ["n8n", "OpenWeatherMap API", "OpenAI GPT-4o-mini"],
       tagColors: ["text-blue-400", "text-yellow-400", "text-red-400"],
-      liveDemo: "https://github.com/Desamsetty-SriAjay/AI-Powered-Trail-Run-Assistant-Built-with-n8n-Orchestration?tab=readme-ov-file",
+      liveDemo:
+        "https://github.com/Desamsetty-SriAjay/AI-Powered-Trail-Run-Assistant-Built-with-n8n-Orchestration?tab=readme-ov-file",
       sourceCode:
         "https://github.com/Desamsetty-SriAjay/AI-Powered-Trail-Run-Assistant-Built-with-n8n-Orchestration?tab=readme-ov-file",
       image: Agent,
@@ -170,9 +176,15 @@ const Home = () => {
       description:
         "A full-featured Todo List application built with the MERN stack (MongoDB, Express, React, Node.js) and a responsive design that works on all screen sizes.",
       tags: ["React", "MongoDB", "JavaScript", "Node.js", "TailwindCSS"],
-      tagColors: ["text-blue-400", "text-green-400", "text-purple-400","text-yellow-500"],
+      tagColors: [
+        "text-blue-400",
+        "text-green-400",
+        "text-purple-400",
+        "text-yellow-500",
+      ],
       liveDemo: "https://todofrontend-henna.vercel.app/",
-      sourceCode: "https://github.com/Desamsetty-SriAjay/To-Do-List?tab=readme-ov-file",
+      sourceCode:
+        "https://github.com/Desamsetty-SriAjay/To-Do-List?tab=readme-ov-file",
       image: Todolist,
     },
   ];
@@ -186,7 +198,9 @@ const Home = () => {
       {/* Mobile Navigation */}
       <div className="md:hidden fixed top-0 left-0 right-0 bg-[#131313] z-50 shadow-md">
         <div className="container mx-auto px-4 py-3 flex justify-between items-center">
-          <div className="text-xl font-bold text-white">Ajay's <span className="text-red-600 animate-pulse">Portfolio</span></div>
+          <div className="text-xl font-bold text-white">
+            Ajay's <span className="text-red-600 animate-pulse">Portfolio</span>
+          </div>
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             className="text-white focus:outline-none"
@@ -250,7 +264,7 @@ const Home = () => {
                   Full Stack developer
                 </h2>
               </header>
-              <p className="text-gray-200 mb-6 text-sm md:text-base">
+              <p className="text-gray-200 mb-6 text-sm md:text-base leading-relaxed tracking-normal max-w-3xl">
                 Full Stack Developer with hands-on experience in building and
                 deploying highly scalable web applications using the MERN stack.
                 Developed AI-powered automation workflows with n8n, eliminating
@@ -262,7 +276,7 @@ const Home = () => {
 
               <div className="mt-6">
                 <a
-                  href={Ajay_Resume}
+                  href={Sri_Ajay_Resume}
                   download="Sri_Ajay_Resume"
                   className="block md:inline-block"
                 >
