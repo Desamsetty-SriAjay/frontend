@@ -15,9 +15,11 @@ import { SiExpress } from "react-icons/si";
 import { SiMongodb } from "react-icons/si";
 import { PiFileSql } from "react-icons/pi";
 import { FaGitSquare } from "react-icons/fa";
+import { FaJava } from "react-icons/fa";
 import { FaGithub } from "react-icons/fa";
 import { FaLinkedin } from "react-icons/fa";
 import { BiLogoGmail } from "react-icons/bi";
+import { FaPython } from "react-icons/fa";
 
 const SkillCategory = ({ title, icons, colors, names, isOpen, onClick }) => (
   <div className="mb-6 overflow-hidden">
@@ -25,8 +27,8 @@ const SkillCategory = ({ title, icons, colors, names, isOpen, onClick }) => (
       onClick={onClick}
       className={`w-full py-3 px-4 md:py-4 md:px-6 rounded-xl text-left flex justify-between items-center transition-all duration-300 ${
         isOpen
-          ? "bg-gradient-to-r from-gray-900 to-black shadow-lg"
-          : "bg-gray-800 hover:bg-gray-700"
+          ? "bg-gradient-to-r from-[#131313] to-black shadow-lg"
+          : "bg-[#131313] hover:bg-[#222222]"
       }`}
     >
       <span className="text-base md:text-xl font-bold">{title}</span>
@@ -47,7 +49,7 @@ const SkillCategory = ({ title, icons, colors, names, isOpen, onClick }) => (
       {icons.map((Icon, idx) => (
         <div
           key={idx}
-          className="flex flex-col items-center p-2 md:p-4 bg-gray-800 rounded-xl hover:bg-gray-700 transition-all duration-300 transform hover:-translate-y-1"
+          className="flex flex-col items-center p-2 md:p-4 bg-[#141414] rounded-xl hover:bg-[#1f1f1f] transition-all duration-300 transform hover:-translate-y-1"
         >
           <Icon
             className={`text-4xl md:text-6xl mb-1 md:mb-2 ${colors[idx]}`}
@@ -106,6 +108,14 @@ const Home = () => {
       names: ["MongoDB", "SQL"],
     },
     {
+      id: "programminglanguages",
+      title: "programming Languages",
+      icons: [FaJava, IoLogoJavascript,FaPython],
+      colors: ["text-orange-700", "text-yellow-500","text-gray-200"],
+      names: ["Java", "JavaScript","Python"],
+    },
+
+    {
       id: "tools",
       title: "Development Tools",
       icons: [FaGitSquare],
@@ -158,11 +168,11 @@ const Home = () => {
       id: 4,
       title: "Todo List",
       description:
-        "Real-time collaborative code editor with syntax highlighting, chat functionality, and video conferencing.",
+        "A full-featured Todo List application built with the MERN stack (MongoDB, Express, React, Node.js) and a responsive design that works on all screen sizes.",
       tags: ["React", "MongoDB", "JavaScript", "Node.js", "TailwindCSS"],
       tagColors: ["text-blue-400", "text-green-400", "text-purple-400","text-yellow-500"],
-      liveDemo: "#",
-      sourceCode: "#",
+      liveDemo: "https://todofrontend-henna.vercel.app/",
+      sourceCode: "https://github.com/Desamsetty-SriAjay/To-Do-List?tab=readme-ov-file",
       image: Todolist,
     },
   ];
@@ -174,7 +184,7 @@ const Home = () => {
   return (
     <div className="space-y-12 md:space-y-20 py-6 md:py-12">
       {/* Mobile Navigation */}
-      <div className="md:hidden fixed top-0 left-0 right-0 bg-gray-900 z-50 shadow-md">
+      <div className="md:hidden fixed top-0 left-0 right-0 bg-[#131313] z-50 shadow-md">
         <div className="container mx-auto px-4 py-3 flex justify-between items-center">
           <div className="text-xl font-bold text-white">Ajay's <span className="text-red-600 animate-pulse">Portfolio</span></div>
           <button
@@ -198,24 +208,26 @@ const Home = () => {
         </div>
 
         {isMenuOpen && (
-          <div className="bg-gray-800 py-2 px-4">
+          <div className="bg-[#131313] py-2 px-4">
             <a
               href="#skills"
-              className="block py-2 text-white"
+              className="block py-2 text-white font-semibold"
               onClick={() => setIsMenuOpen(false)}
             >
               Skills
             </a>
+            <hr />
             <a
               href="#projects"
-              className="block py-2 text-white"
+              className="block py-2 text-white font-semibold"
               onClick={() => setIsMenuOpen(false)}
             >
               Projects
             </a>
+            <hr />
             <a
               href="#details"
-              className="block py-2 text-white"
+              className="block py-2 text-white font-semibold"
               onClick={() => setIsMenuOpen(false)}
             >
               Contact
@@ -324,9 +336,9 @@ const Home = () => {
             {visibleProjects.map((project) => (
               <div
                 key={project.id}
-                className="group relative overflow-hidden rounded-xl bg-gray-900 border border-gray-800 hover:border-red-600 transition-all duration-500 hover:shadow-lg hover:shadow-red-900/20"
+                className="group relative overflow-hidden rounded-xl bg-gradient-to-r from-[#131313] to-[#1c1c1c] border border-gray-800 hover:border-red-600 transition-all duration-500 hover:shadow-lg hover:shadow-red-900/20"
               >
-                <div className="h-40 md:h-48 bg-gradient-to-r from-gray-800 to-gray-700 flex items-center justify-center">
+                <div className="h-40 md:h-48 bg-gradient-to-r from-[#131313] to-[#1c1c1c] flex items-center justify-center">
                   {project.image ? (
                     <img
                       src={project.image}
@@ -352,7 +364,7 @@ const Home = () => {
                     {project.tags.map((tag, idx) => (
                       <span
                         key={idx}
-                        className={`px-2 py-1 text-xs md:text-sm bg-gray-800 rounded-full ${project.tagColors[idx]}`}
+                        className={`px-2 py-1 text-xs md:text-sm bg-[#131313] rounded-full ${project.tagColors[idx]}`}
                       >
                         {tag}
                       </span>
@@ -466,7 +478,7 @@ const Home = () => {
           <div className="mt-4">
             <a
               href="mailto:desamsettysriajay@gmail.com"
-              className=" inline-block px-4 py-2 bg-gray-800 hover:bg-gray-700 rounded-lg hover:text-white transition duration-300 text-sm md:text-base text-gray-200"
+              className=" inline-block px-4 py-2 bg-[#131313] hover:bg-[#302f2f] rounded-lg hover:text-white transition duration-300 text-sm md:text-base text-gray-200"
             >
               desamsettysriajay@gmail.com
             </a>
