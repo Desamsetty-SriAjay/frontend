@@ -1,8 +1,11 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import perfect from "../assets/perfect.jpg";
-import Sri_Ajay_Resume from "../assets/Sri_Ajay_Resume.pdf";
+import Sri_Ajay_Resume from "../assets/SriAjayResume.pdf";
 import TrendyCart from "../assets/TrendyCart.png";
 import Headlines from "../assets/Headlines.png";
+import Ai from "../assets/Ai.png"
+import { BiLogoSpringBoot } from "react-icons/bi";
+import job from "../assets/job.png"
 import Agent from "../assets/Agent.png";
 import Todolist from "../assets/Todolist.png";
 import { TiHtml5 } from "react-icons/ti";
@@ -25,15 +28,17 @@ const SkillCategory = ({ title, icons, colors, names, isOpen, onClick }) => (
   <div className="mb-6 overflow-hidden">
     <button
       onClick={onClick}
-      className={`w-full py-3 px-4 md:py-4 md:px-6 rounded-xl text-left flex justify-between items-center transition-all duration-300 ${
+      className={`w-full py-4 px-6 rounded-2xl text-left flex justify-between items-center transition-all duration-500 ${
         isOpen
-          ? "bg-gradient-to-r from-[#131313] to-black shadow-lg"
-          : "bg-[#131313] hover:bg-[#222222]"
+          ? "bg-gradient-to-r from-red-900/20 to-black shadow-2xl shadow-red-500/10 border border-red-500/20"
+          : "bg-gradient-to-r from-[#1a1a1a] to-[#131313] hover:from-[#222222] hover:to-[#1a1a1a] border border-gray-800 hover:border-red-500/30 shadow-lg"
       }`}
     >
-      <span className="text-base md:text-xl font-bold">{title}</span>
+      <span className="text-xl font-bold bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
+        {title}
+      </span>
       <span
-        className={`transform transition-transform duration-300 ${
+        className={`transform transition-transform duration-500 text-red-500 ${
           isOpen ? "rotate-180" : ""
         }`}
       >
@@ -42,19 +47,19 @@ const SkillCategory = ({ title, icons, colors, names, isOpen, onClick }) => (
     </button>
 
     <div
-      className={`grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3 md:gap-4 mt-4 transition-all duration-500 ease-in-out overflow-hidden ${
+      className={`grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4 mt-4 transition-all duration-700 ease-in-out overflow-hidden ${
         isOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
       }`}
     >
       {icons.map((Icon, idx) => (
         <div
           key={idx}
-          className="flex flex-col items-center p-2 md:p-4 bg-[#141414] rounded-xl hover:bg-[#1f1f1f] transition-all duration-300 transform hover:-translate-y-1"
+          className="group flex flex-col items-center p-4 bg-gradient-to-b from-[#1a1a1a] to-[#131313] rounded-2xl border border-gray-800 hover:border-red-500/50 transition-all duration-500 transform hover:-translate-y-2 hover:shadow-2xl hover:shadow-red-500/10"
         >
           <Icon
-            className={`text-4xl md:text-6xl mb-1 md:mb-2 ${colors[idx]}`}
+            className={`text-5xl md:text-6xl mb-2 transition-transform duration-500 group-hover:scale-110 ${colors[idx]}`}
           />
-          <span className="text-xs md:text-sm text-gray-300">{names[idx]}</span>
+          <span className="text-sm text-gray-300 font-medium">{names[idx]}</span>
         </div>
       ))}
     </div>
@@ -62,9 +67,18 @@ const SkillCategory = ({ title, icons, colors, names, isOpen, onClick }) => (
 );
 
 const Home = () => {
-  const [activeCategory, setActiveCategory] = useState(null);
+  const [activeCategory, setActiveCategory] = useState("frontend");
   const [showAllProjects, setShowAllProjects] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const toggleCategory = (category) => {
     setActiveCategory(activeCategory === category ? null : category);
@@ -96,9 +110,9 @@ const Home = () => {
     {
       id: "backend",
       title: "Backend Technologies",
-      icons: [LiaNode, SiExpress],
+      icons: [BiLogoSpringBoot,LiaNode, SiExpress],
       colors: ["text-green-500", "text-yellow-500"],
-      names: ["Node.js", "Express"],
+      names: ["Spring Boot","Node.js", "Express"],
     },
     {
       id: "database",
@@ -109,12 +123,11 @@ const Home = () => {
     },
     {
       id: "programminglanguages",
-      title: "programming Languages",
+      title: "Programming Languages",
       icons: [FaJava, IoLogoJavascript, FaPython],
       colors: ["text-orange-700", "text-yellow-500", "text-gray-200"],
       names: ["Java", "JavaScript", "Python"],
     },
-
     {
       id: "tools",
       title: "Development Tools",
@@ -123,12 +136,47 @@ const Home = () => {
       names: ["Git"],
     },
   ];
+
   const projectsData = [
-    {
+        {
       id: 1,
+      title: "Job Mela",
+      description:
+        "A full-stack job portal where users can apply for jobs, manage job postings, and analyze resumes using AI.",
+      tags: ["React.js", "Spring Boot", "MySQL (Aiven Cloud)", "TailwindCSS","JWT"],
+      tagColors: [
+        "text-red-400",
+        "text-blue-400",
+        "text-yellow-400",
+        "text-green-400",
+      ],
+      liveDemo: "https://jobmelaclient.netlify.app/",
+      sourceCode:
+        "https://github.com/Desamsetty-SriAjay/Job-Mela/tree/main",
+      image:job,
+    },
+        {
+      id: 2,
+      title: "AI prompt gallery",
+      description:
+        "A web application where users can browse AI prompts with reference images and copy them for use in any AI image generation tool.",
+      tags: ["React.js", "Spring Boot", "MySQL (Aiven Cloud)", "TailwindCSS"],
+      tagColors: [
+        "text-red-400",
+        "text-blue-400",
+        "text-yellow-400",
+        "text-green-400",
+      ],
+      liveDemo: "https://aipromptgalleryclient.netlify.app/",
+      sourceCode:
+        "https://github.com/Desamsetty-SriAjay/AI-prompt-gallery-",
+      image: Ai,
+    },
+    {
+      id: 3,
       title: "TrendyCart",
       description:
-        "TrendyCart is a full-stack fashion e-commerce web application built with the MERN Stack. It includes a feature-rich user interface and a secure admin panel. Users can browse collections, filter and search products, add items to the cart, place orders, and authenticate using JWT.",
+        "TrendyCart is a full-stack fashion e-commerce web application built with the MERN Stack. It includes a feature-rich user interface and a secure admin panel.",
       tags: ["React", "MongoDB", "JavaScript", "Node.js", "TailwindCSS"],
       tagColors: [
         "text-red-400",
@@ -142,10 +190,10 @@ const Home = () => {
       image: TrendyCart,
     },
     {
-      id: 2,
+      id: 4,
       title: "Headlines Hub",
       description:
-        "In today's fast-paced world, switching between different news channels or websites to stay updated is inconvenient. Headlines Hub solves this by aggregating headlines from multiple sources into one user-friendly platform.",
+        "In today's fast-paced world, switching between different news channels or websites to stay updated is inconvenient. Headlines Hub solves this by aggregating headlines from multiple sources.",
       tags: ["React", "MongoDB", "JavaScript", "Node.js", "TailwindCSS"],
       tagColors: [
         "text-blue-400",
@@ -158,10 +206,10 @@ const Home = () => {
       image: Headlines,
     },
     {
-      id: 3,
+      id: 5,
       title: "AI-Powered Trail Run Assistant",
       description:
-        " This project is an AI-powered assistant that recommends trail runs based on calendar events, real-time weather, and hiking trail data using GPT-4o-mini, Google APIs, and LangChain-compatible nodes — all orchestrated in n8n.",
+        "This project is an AI-powered assistant that recommends trail runs based on calendar events, real-time weather, and hiking trail data using GPT-4o-mini.",
       tags: ["n8n", "OpenWeatherMap API", "OpenAI GPT-4o-mini"],
       tagColors: ["text-blue-400", "text-yellow-400", "text-red-400"],
       liveDemo:
@@ -171,10 +219,10 @@ const Home = () => {
       image: Agent,
     },
     {
-      id: 4,
+      id: 6,
       title: "Todo List",
       description:
-        "A full-featured Todo List application built with the MERN stack (MongoDB, Express, React, Node.js) and a responsive design that works on all screen sizes.",
+        "A full-featured Todo List application built with the MERN stack and a responsive design that works on all screen sizes.",
       tags: ["React", "MongoDB", "JavaScript", "Node.js", "TailwindCSS"],
       tagColors: [
         "text-blue-400",
@@ -189,21 +237,30 @@ const Home = () => {
     },
   ];
 
-  //  how many projects to show
   const visibleProjects = showAllProjects
     ? projectsData
     : projectsData.slice(0, 3);
+
   return (
-    <div className="space-y-12 md:space-y-20 py-6 md:py-12">
-      {/* Mobile Navigation */}
-      <div className="md:hidden fixed top-0 left-0 right-0 bg-[#131313] z-50 shadow-md">
+    <div className="min-h-screen bg-gradient-to-br from-[#0a0a0a] via-[#111111] to-[#0a0a0a] relative overflow-hidden">
+      {/* Animated Background Elements */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute -top-40 -right-40 w-80 h-80 bg-red-500/5 rounded-full blur-3xl"></div>
+        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-red-500/5 rounded-full blur-3xl"></div>
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-red-500/3 rounded-full blur-3xl"></div>
+      </div>
+
+      {/* Enhanced Mobile Navigation */}
+      <div className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+        isScrolled ? 'bg-black/80 backdrop-blur-lg shadow-2xl' : 'bg-transparent'
+      }`}>
         <div className="container mx-auto px-4 py-3 flex justify-between items-center">
           <div className="text-xl font-bold text-white">
             Ajay's <span className="text-red-600 animate-pulse">Portfolio</span>
           </div>
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="text-white focus:outline-none"
+            className="text-white focus:outline-none p-2 rounded-lg bg-black/20 hover:bg-red-500/20 transition-colors"
           >
             <svg
               className="w-6 h-6"
@@ -222,26 +279,24 @@ const Home = () => {
         </div>
 
         {isMenuOpen && (
-          <div className="bg-[#131313] py-2 px-4">
+          <div className="bg-black/90 backdrop-blur-lg py-4 px-6 border-t border-red-500/20">
             <a
               href="#skills"
-              className="block py-2 text-white font-semibold"
+              className="block py-3 text-white font-semibold hover:text-red-400 transition-colors border-b border-gray-800"
               onClick={() => setIsMenuOpen(false)}
             >
               Skills
             </a>
-            <hr />
             <a
               href="#projects"
-              className="block py-2 text-white font-semibold"
+              className="block py-3 text-white font-semibold hover:text-red-400 transition-colors border-b border-gray-800"
               onClick={() => setIsMenuOpen(false)}
             >
               Projects
             </a>
-            <hr />
             <a
               href="#details"
-              className="block py-2 text-white font-semibold"
+              className="block py-3 text-white font-semibold hover:text-red-400 transition-colors"
               onClick={() => setIsMenuOpen(false)}
             >
               Contact
@@ -250,255 +305,279 @@ const Home = () => {
         )}
       </div>
 
-      <section className="min-h-[70vh] md:min-h-[80vh] flex items-center py-8 pt-20 md:pt-8">
-        <div className="container mx-auto px-4">
-          <div className="flex flex-col-reverse md:flex-row items-center gap-8">
-            {/* Content Section */}
-            <div className="md:w-7/12">
-              <header className="mb-6">
-                <h1 className="text-2xl md:text-3xl lg:text-5xl font-bold text-gray-100 mb-2">
-                  Desamsetty{" "}
-                  <span className="text-red-600 animate-pulse">Sri Ajay</span>
-                </h1>
-                <h2 className="text-xl md:text-2xl lg:text-3xl font-semibold">
-                  Full Stack developer
-                </h2>
-              </header>
-              <p className="text-gray-200 mb-6 text-sm md:text-base leading-relaxed tracking-normal max-w-3xl">
-                Full Stack Developer with hands-on experience in building and
-                deploying highly scalable web applications using the MERN stack.
-                Developed AI-powered automation workflows with n8n, eliminating
-                manual tasks through realtime email decision systems. Proficient
-                in end-to-end development including secure authentication (JWT),
-                cloud deployment (Vercel, Render), RESTful APIs, and Git version
-                control.
-              </p>
+      <div className="relative z-10 space-y-20 md:space-y-32 py-8 md:py-16">
+        {/* Hero Section */}
+        <section className="min-h-[80vh] md:min-h-[90vh] flex items-center py-8 pt-24 md:pt-16">
+          <div className="container mx-auto px-4">
+            <div className="flex flex-col-reverse md:flex-row items-center gap-12 md:gap-16">
+              {/* Content Section */}
+              <div className="md:w-7/12 text-center md:text-left">
+                <div className="inline-block mb-4 px-4 py-2 bg-red-500/10 border border-red-500/20 rounded-full">
+                  <span className="text-red-400 text-sm font-semibold">Full Stack Developer</span>
+                </div>
+                
+                <header className="mb-8">
+                  <h1 className="text-4xl md:text-5xl lg:text-7xl font-bold text-white mb-4 leading-tight">
+                    Desamsetty{" "}
+                    <span className="text-red-600 bg-gradient-to-r from-red-600 to-red-400 bg-clip-text text-transparent animate-pulse">
+                      Sri Ajay
+                    </span>
+                  </h1>
+                  <h2 className="text-xl md:text-2xl lg:text-3xl font-semibold bg-gradient-to-r from-white to-gray-400 bg-clip-text text-transparent">
+                    Crafting Digital Experiences That Matter
+                  </h2>
+                </header>
+                
+                <p className="text-gray-300 mb-8 text-lg md:text-xl leading-relaxed max-w-3xl">
+                  Java Full Stack Developer with hands-on experience in React, Spring Boot, and backend API development. I
+learn quickly, adapt fast, and deliver high-quality solutions. I am also integrating AI features into my projects.
+                </p>
 
-              <div className="mt-6">
-                <a
-                  href={Sri_Ajay_Resume}
-                  download="Sri_Ajay_Resume"
-                  className="block md:inline-block"
-                >
-                  <button
-                    className="w-full md:w-auto bg-white text-black hover:bg-gray-200 font-bold py-2 px-4 md:py-3 md:px-6 rounded-lg transition-all duration-400 transform hover:-translate-y-1 md:hover:-translate-y-2 
-                    focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 focus:outline-none aria-label=Download Resume"
+                <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
+                  <a
+                    href={Sri_Ajay_Resume}
+                    download="Sri_Ajay_Resume"
+                    className="group"
                   >
-                    Resume Download
-                  </button>
-                </a>
+                    <button className="w-full sm:w-auto bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white font-bold py-4 px-8 rounded-2xl transition-all duration-500 transform hover:-translate-y-1 hover:shadow-2xl hover:shadow-red-500/20 flex items-center gap-2">
+                      <span>Download Resume</span>
+                      <svg className="w-5 h-5 group-hover:translate-y-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+                      </svg>
+                    </button>
+                  </a>
+                  
+                  <a href="#projects" className="group">
+                    <button className="w-full sm:w-auto bg-transparent border-2 border-red-500/50 hover:border-red-400 text-white font-bold py-4 px-8 rounded-2xl transition-all duration-500 transform hover:-translate-y-1 hover:shadow-2xl hover:shadow-red-500/10">
+                      View My Work
+                    </button>
+                  </a>
+                </div>
               </div>
-            </div>
 
-            <div className="md:w-5/12 flex justify-center mb-8 md:mb-0">
-              <div className="relative w-50 h-50 md:w-74 md:h-74 overflow-hidden rounded-full border-4 border-black">
-                <img
-                  src={perfect}
-                  alt="Desamsetty Sri Ajay - Full Stack Developer"
-                  className="w-full h-full object-cover object-top  scale-130 transition-transform duration-300 transform "
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Skills Section */}
-      <section id="skills" className="py-12 md:py-16 ">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-12 md:mb-16">
-            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-3">
-              My <span className="text-red-700 animate-pulse">Skills</span>
-            </h2>
-            <p className="text-gray-300 max-w-2xl mx-auto text-sm md:text-base">
-              Technologies I've mastered to create full-stack applications
-            </p>
-          </div>
-
-          <div className="max-w-4xl mx-auto">
-            {categories.map((category) => (
-              <SkillCategory
-                key={category.id}
-                title={category.title}
-                icons={category.icons}
-                colors={category.colors}
-                names={category.names}
-                isOpen={activeCategory === category.id}
-                onClick={() => toggleCategory(category.id)}
-              />
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Projects Section */}
-      <section id="projects" className="py-12 md:py-20">
-        <div className="container mx-auto px-4">
-          {/* Section Header */}
-          <div className="text-center mb-12 md:mb-16">
-            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-3">
-              My <span className="text-red-600 animate-pulse">Projects</span>
-            </h1>
-            <p className="text-gray-400 max-w-2xl mx-auto text-sm md:text-base">
-              Here are some of my featured works. Each project was built with
-              passion and attention to detail.
-            </p>
-          </div>
-
-          {/* Project Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {visibleProjects.map((project) => (
-              <div
-                key={project.id}
-                className="group relative overflow-hidden rounded-xl bg-gradient-to-r from-[#131313] to-[#1c1c1c] border border-gray-800 hover:border-red-600 transition-all duration-500 hover:shadow-lg hover:shadow-red-900/20"
-              >
-                <div className="h-40 md:h-48 bg-gradient-to-r from-[#131313] to-[#1c1c1c] flex items-center justify-center">
-                  {project.image ? (
+              {/* Profile Image Section */}
+              <div className="md:w-5/12 flex justify-center">
+                <div className="relative">
+                  <div className="absolute -inset-4 bg-gradient-to-r from-red-600 to-red-400 rounded-full blur-xl opacity-20 animate-pulse"></div>
+                  <div className="relative w-64 h-64 md:w-80 md:h-80 overflow-hidden rounded-full border-4 border-red-500/20 shadow-2xl">
                     <img
-                      src={project.image}
-                      alt={project.title}
-                      className="max-h-full max-w-full p-2 object-contain"
+                      src={perfect}
+                      alt="Desamsetty Sri Ajay - Full Stack Developer"
+                      className="w-full h-full object-cover object-top scale-110 transition-transform duration-700 hover:scale-100"
                     />
-                  ) : (
-                    <div className="w-full h-full flex items-center justify-center">
-                      <span className="text-gray-400">{project.title}</span>
-                    </div>
-                  )}
-                </div>
-
-                <div className="p-4 md:p-6">
-                  <h3 className="text-xl md:text-2xl font-bold text-white mb-2">
-                    {project.title}
-                  </h3>
-                  <p className="text-gray-400 mb-4 text-sm md:text-base">
-                    {project.description}
-                  </p>
-
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    {project.tags.map((tag, idx) => (
-                      <span
-                        key={idx}
-                        className={`px-2 py-1 text-xs md:text-sm bg-[#131313] rounded-full ${project.tagColors[idx]}`}
-                      >
-                        {tag}
-                      </span>
-                    ))}
                   </div>
-
-                  <div className="flex flex-wrap gap-4">
-                    <a
-                      href={project.liveDemo}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-red-400 hover:text-red-300 font-medium flex items-center transition-colors text-sm md:text-base"
-                    >
-                      <svg
-                        className="w-4 h-4 md:w-5 md:h-5 mr-1"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth="2"
-                          d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-                        ></path>
-                      </svg>
-                      Live Demo
-                    </a>
-                    <a
-                      href={project.sourceCode}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-gray-400 hover:text-white font-medium flex items-center transition-colors text-sm md:text-base"
-                    >
-                      <svg
-                        className="w-4 h-4 md:w-5 md:h-5 mr-1"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth="2"
-                          d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"
-                        ></path>
-                      </svg>
-                      Source Code
-                    </a>
-                  </div>
+                  {/* Floating elements */}
+                  <div className="absolute -top-4 -right-4 w-8 h-8 bg-red-500 rounded-full animate-bounce"></div>
+                  <div className="absolute -bottom-4 -left-4 w-6 h-6 bg-blue-500 rounded-full animate-bounce delay-1000"></div>
                 </div>
               </div>
-            ))}
+            </div>
           </div>
+        </section>
 
-          {/* View More/Less Button */}
-          <div className="text-center mt-8 md:mt-12">
-            <button
-              onClick={toggleProjectsView}
-              className="px-6 py-2 md:px-8 md:py-3 bg-red-600 hover:bg-red-700 text-white font-medium rounded-full transition-all duration-300 transform hover:scale-105"
-            >
-              {showAllProjects ? "Show Less Projects" : "View All Projects"}
-            </button>
+        {/* Skills Section */}
+        <section id="skills" className="py-16 md:py-24 relative">
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-red-500/5 to-transparent"></div>
+          <div className="container mx-auto px-4 relative z-10">
+            <div className="text-center mb-16 md:mb-20">
+              <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
+                My <span className="text-red-600 bg-gradient-to-r from-red-600 to-red-400 bg-clip-text text-transparent">Skills</span>
+              </h2>
+              <p className="text-gray-400 text-xl max-w-2xl mx-auto">
+                Technologies I've mastered to create full-stack applications
+              </p>
+            </div>
+
+            <div className="max-w-6xl mx-auto">
+              {categories.map((category) => (
+                <SkillCategory
+                  key={category.id}
+                  title={category.title}
+                  icons={category.icons}
+                  colors={category.colors}
+                  names={category.names}
+                  isOpen={activeCategory === category.id}
+                  onClick={() => toggleCategory(category.id)}
+                />
+              ))}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Get In Touch */}
-      <section id="details" className="py-12 md:py-16">
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-4">
-            Get In <span className="text-red-600 animate-pulse">Touch</span>
-          </h2>
-          <p className="text-gray-300 mb-6 md:mb-8 max-w-xl mx-auto text-sm md:text-base">
-            Feel free to connect with me through my social media profiles.
-          </p>
+        {/* Projects Section */}
+        <section id="projects" className="py-16 md:py-24">
+          <div className="container mx-auto px-4">
+            {/* Section Header */}
+            <div className="text-center mb-16 md:mb-20">
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
+                My <span className="text-red-600 bg-gradient-to-r from-red-600 to-red-400 bg-clip-text text-transparent">Projects</span>
+              </h1>
+              <p className="text-gray-400 text-xl max-w-2xl mx-auto">
+                Here are some of my featured works. Each project was built with
+                passion and attention to detail.
+              </p>
+            </div>
 
-          {/* Social Icons */}
-          <div className="flex justify-center gap-6 mb-6">
-            <a
-              href="https://github.com/Desamsetty-SriAjay"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-white hover:text-gray-400 transition duration-300"
-              aria-label="GitHub Profile"
-            >
-              <FaGithub className="text-3xl md:text-4xl" />
-            </a>
+            {/* Project Cards */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8">
+              {visibleProjects.map((project) => (
+                <div
+                  key={project.id}
+                  className="group relative overflow-hidden rounded-3xl bg-gradient-to-br from-[#131313] to-[#0a0a0a] border border-gray-800 hover:border-red-500/50 transition-all duration-700 hover:shadow-2xl hover:shadow-red-500/10"
+                >
+                  {/* Project Image */}
+                  <div className="h-48 bg-gradient-to-r from-[#131313] to-[#1c1c1c] flex items-center justify-center relative overflow-hidden">
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent z-10"></div>
+                    {project.image ? (
+                      <img
+                        src={project.image}
+                        alt={project.title}
+                        className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700"
+                      />
+                    ) : (
+                      <div className="w-full h-full flex items-center justify-center">
+                        <span className="text-gray-400">{project.title}</span>
+                      </div>
+                    )}
+                  </div>
 
-            <a
-              href="https://www.linkedin.com/in/desamsettysriajay/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-blue-500 hover:text-blue-400 transition duration-300"
-              aria-label="LinkedIn Profile"
-            >
-              <FaLinkedin className="text-3xl md:text-4xl" />
-            </a>
+                  {/* Project Content */}
+                  <div className="p-6 md:p-8 relative z-20">
+                    <h3 className="text-2xl md:text-3xl font-bold text-white mb-4 group-hover:text-red-400 transition-colors">
+                      {project.title}
+                    </h3>
+                    <p className="text-gray-400 mb-6 leading-relaxed">
+                      {project.description}
+                    </p>
 
-            <a
-              href="mailto:desamsettysriajay@gmail.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-red-500 hover:text-red-400 transition duration-300"
-              aria-label="Send Email"
-            >
-              <BiLogoGmail className="text-3xl md:text-4xl" />
-            </a>
+                    <div className="flex flex-wrap gap-2 mb-6">
+                      {project.tags.map((tag, idx) => (
+                        <span
+                          key={idx}
+                          className={`px-3 py-1 text-sm bg-black/50 border border-gray-800 rounded-full ${project.tagColors[idx]} font-medium`}
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+
+                    <div className="flex flex-wrap gap-4">
+                      <a
+                        href={project.liveDemo}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-2 text-red-400 hover:text-red-300 font-semibold transition-all duration-300 group/link"
+                      >
+                        <svg
+                          className="w-5 h-5 group-hover/link:translate-x-1 transition-transform"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth="2"
+                            d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                          ></path>
+                        </svg>
+                        Live Demo
+                      </a>
+                      <a
+                        href={project.sourceCode}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-2 text-gray-400 hover:text-white font-semibold transition-all duration-300 group/link"
+                      >
+                        <svg
+                          className="w-5 h-5 group-hover/link:scale-110 transition-transform"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth="2"
+                            d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"
+                          ></path>
+                        </svg>
+                        Source Code
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* View More/Less Button */}
+            <div className="text-center mt-12">
+              <button
+                onClick={toggleProjectsView}
+                className="px-8 py-4 bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white font-bold rounded-2xl transition-all duration-500 transform hover:scale-105 hover:shadow-2xl hover:shadow-red-500/20"
+              >
+                {showAllProjects ? "Show Less Projects" : "View All Projects"}
+              </button>
+            </div>
           </div>
+        </section>
 
-          <div className="mt-4">
-            <a
-              href="mailto:desamsettysriajay@gmail.com"
-              className=" inline-block px-4 py-2 bg-[#131313] hover:bg-[#302f2f] rounded-lg hover:text-white transition duration-300 text-sm md:text-base text-gray-200"
-            >
-              desamsettysriajay@gmail.com
-            </a>
+        {/* Contact Section */}
+        <section id="details" className="py-16 md:py-24 relative">
+          <div className="absolute inset-0 bg-gradient-to-t from-transparent via-red-500/5 to-transparent"></div>
+          <div className="container mx-auto px-4 text-center relative z-10">
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
+              Get In <span className="text-red-600 bg-gradient-to-r from-red-600 to-red-400 bg-clip-text text-transparent">Touch</span>
+            </h2>
+            <p className="text-gray-400 text-xl mb-12 max-w-xl mx-auto">
+              Feel free to connect with me through my social media profiles.
+            </p>
+
+            {/* Social Icons */}
+            <div className="flex justify-center gap-8 mb-12">
+              <a
+                href="https://github.com/Desamsetty-SriAjay"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group p-4 bg-gradient-to-br from-[#1a1a1a] to-[#131313] border border-gray-800 rounded-2xl hover:border-red-500/50 transition-all duration-500 transform hover:-translate-y-2 hover:shadow-2xl hover:shadow-red-500/10"
+                aria-label="GitHub Profile"
+              >
+                <FaGithub className="text-4xl md:text-5xl text-white group-hover:text-red-400 transition-colors" />
+              </a>
+
+              <a
+                href="https://www.linkedin.com/in/desamsettysriajay/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group p-4 bg-gradient-to-br from-[#1a1a1a] to-[#131313] border border-gray-800 rounded-2xl hover:border-red-500/50 transition-all duration-500 transform hover:-translate-y-2 hover:shadow-2xl hover:shadow-red-500/10"
+                aria-label="LinkedIn Profile"
+              >
+                <FaLinkedin className="text-4xl md:text-5xl text-blue-500 group-hover:text-blue-400 transition-colors" />
+              </a>
+
+              <a
+                href="mailto:desamsettysriajay@gmail.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group p-4 bg-gradient-to-br from-[#1a1a1a] to-[#131313] border border-gray-800 rounded-2xl hover:border-red-500/50 transition-all duration-500 transform hover:-translate-y-2 hover:shadow-2xl hover:shadow-red-500/10"
+                aria-label="Send Email"
+              >
+                <BiLogoGmail className="text-4xl md:text-5xl text-red-500 group-hover:text-red-400 transition-colors" />
+              </a>
+            </div>
+
+            <div className="mt-8">
+              <a
+                href="mailto:desamsettysriajay@gmail.com"
+                className="inline-flex items-center gap-3 px-6 py-4 bg-gradient-to-r from-[#1a1a1a] to-[#131313] border border-gray-800 hover:border-red-500/50 rounded-2xl hover:text-white transition-all duration-500 transform hover:-translate-y-1 text-lg text-gray-200 font-semibold"
+              >
+                <BiLogoGmail className="text-2xl text-red-500" />
+                desamsettysriajay@gmail.com
+              </a>
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      </div>
     </div>
   );
 };
